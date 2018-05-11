@@ -1,3 +1,9 @@
+require 'active_subdomain'
+
 Rails.application.routes.draw do
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+  constraints(ActiveSubdomain) do
+    root to: 'shop#show'
+  end
+
+  root to: 'shop#index'
 end
