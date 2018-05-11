@@ -1,0 +1,8 @@
+<h1>New Shop Registration</h1>
+
+<%= form_for @shop, url: {action: 'create'} do |shop| %>
+    Shop Name         : <%= shop.text_field :name, maxlength: 256, size: 25 %><br />
+    Shop Description  : <%= shop.text_area :description, size: '60x12' %><br />
+    Subdomain         : <%= shop.text_field :subdomain, maxlength: 25 %><br />
+    <%= shop.submit 'Create' %>
+<% end %>
