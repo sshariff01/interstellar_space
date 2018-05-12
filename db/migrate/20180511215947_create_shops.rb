@@ -1,9 +1,9 @@
 class CreateShops < ActiveRecord::Migration[5.1]
   def change
     create_table :shops do |t|
-      t.string      :name, limit: 256
+      t.string      :name, limit: 256, null: false
       t.text        :description
-      t.string      :subdomain, limit: 25
+      t.string      :subdomain, limit: 25, unique: true, null: false
 
       t.timestamps
     end

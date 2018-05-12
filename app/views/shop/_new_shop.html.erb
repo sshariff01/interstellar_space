@@ -1,0 +1,28 @@
+<% if errors.present? %>
+  <ul>
+    <% errors.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+  </ul>
+<% end %>
+
+<%= form_for shop, url: create_shop_path do |s| %>
+  <table>
+    <tr>
+      <td>Shop Name</td>
+      <td><%= s.text_field :name, maxlength: 256, size: 25 %></td>
+    </tr>
+    <tr>
+      <td>Shop Description</td>
+      <td><%= s.text_area :description, size: '60x12' %></td>
+    </tr>
+    <tr>
+      <td>Subdomain</td>
+      <td><%= s.text_field :subdomain, maxlength: 25 %></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><%= s.submit 'Create' %></td>
+    </tr>
+  </table>
+<% end %>

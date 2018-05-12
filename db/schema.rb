@@ -13,9 +13,9 @@
 ActiveRecord::Schema.define(version: 20180511215947) do
 
   create_table "shops", force: :cascade do |t|
-    t.string "name", limit: 256
+    t.string "name", limit: 256, null: false
     t.text "description"
-    t.string "subdomain", limit: 25
+    t.string "subdomain", limit: 25, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

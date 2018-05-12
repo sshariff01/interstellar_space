@@ -4,14 +4,19 @@ class ShopController < ApplicationController
   end
 
   def create
-    shop = Shop.create(shop_params)
+    @shop = Shop.create(shop_params)
 
-    redirect_to generated_shop_url(shop)
+    if @shop.valid?
+      redirect_to generated_shop_url(@shop) and return
+    end
+
+    @errors = @shop.errors.full_messages
+
+    render :new
   end
 
-
   def show
-    @shop_name = request.subdomain
+    @shop = Shop.where(:subdomain == request.subdomain)
   end
 
   private
