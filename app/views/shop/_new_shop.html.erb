@@ -9,20 +9,20 @@
 <%= form_for shop, url: create_shop_path do |s| %>
   <table>
     <tr>
-      <td>Shop Name</td>
+      <td id="name">Shop Name</td>
       <td><%= s.text_field :name, maxlength: 256, size: 25 %></td>
     </tr>
     <tr>
-      <td>Shop Description</td>
+      <td id="description">Shop Description</td>
       <td><%= s.text_area :description, size: '60x12' %></td>
     </tr>
     <tr>
-      <td>Subdomain</td>
+      <td id="subdomain">Subdomain</td>
       <td><%= s.text_field :subdomain, maxlength: 25 %></td>
     </tr>
     <tr>
       <td></td>
-      <td><%= s.submit 'Create' %></td>
+      <td><%= s.submit 'Create', id: 'create_shop' %></td>
     </tr>
   </table>
 <% end %>
