@@ -15,4 +15,8 @@ class Shop < ApplicationRecord
   def subdomain_must_contain_only_valid_characters
     errors.add(:subdomain, 'Subdomain may only contain alphanumeric characters') if !VALID_SUBDOMAIN_REGEX.match(subdomain)
   end
+
+  def urn(domain)
+    "#{subdomain}.#{domain}"
+  end
 end

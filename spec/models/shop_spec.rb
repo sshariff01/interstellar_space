@@ -2,7 +2,7 @@ require_relative '../../app/models/shop'
 
 describe Shop do
   describe 'on save' do
-    context ':name' do
+    describe ':name' do
       it 'creates an error if the name length is not between 3 and 40 characters' do
         name_too_short = Shop.create(:name => 'Hi')
         name_too_long = Shop.create(:name => 'This is my Shop Name, and it is way too long')
@@ -26,7 +26,7 @@ describe Shop do
       end
     end
 
-    context ':subdomain' do
+    describe ':subdomain' do
       it 'creates an error if the subdomain length is not between 3 and 25 characters' do
         subdomain_too_short = Shop.create(:subdomain => 'hi')
         subdomain_too_long = Shop.create(:subdomain => 'this-is-my-subdomain-name-which-is-way-too-long')
@@ -55,6 +55,18 @@ describe Shop do
 
         expect(error_message_for(subdomain, :subdomain)).to be_empty
         expect(error_message_for(subdomain_duplicate, :subdomain)).to include('has already been taken')
+      end
+    end
+
+    describe '#urn' do
+      context 'when supplied with a domain name' do
+        it 'returns the URN for the shop' do
+          shop = Shop.create(:name => 'Apple Store', :subdomain => 'apple-store')
+
+          urn = shop.urn('domain')
+
+          expect(urn).to eq('apple-store.domain')
+        end
       end
     end
   end
