@@ -35,7 +35,7 @@ class ShopController < ApplicationController
   end
 
   def show
-    @shop = Shop.where(:subdomain == request.subdomain)
+    @shop = Shop.where(:subdomain == request.subdomain).take!
   end
 
   private
