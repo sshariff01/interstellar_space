@@ -9,10 +9,10 @@ class ShopController < ApplicationController
     @shop = Shop.create(shop_params)
 
     if @shop.valid?
-      shop_urn = @shop.urn(request.domain)
-      shop_urn += ":#{request.port}" if Rails.env == 'development'
+      shop_urn = "#{request.protocol}#{@shop.urn(request.domain)}"
+      shop_urn += ":#{request.port}" if Rails.env.development? || Rails.env.test?
       respond_to do |format|
-        format.html { redirect_to "#{request.protocol}#{shop_urn}" }
+        format.html { redirect_to shop_urn }
         format.json {
           render status: :accepted,
                  json: {
