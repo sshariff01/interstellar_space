@@ -35,7 +35,13 @@ class ShopController < ApplicationController
   end
 
   def show
-    @shop = Shop.where(:subdomain == request.subdomain).take!
+    @shop = Shop.find_by_subdomain(request.subdomain)
+
+    if @shop.nil?
+      url_for_root = "#{request.protocol}#{request.domain}"
+      url_for_root += ":#{request.port}" if Rails.env.development? || Rails.env.test?
+      redirect_to url_for_root
+    end
   end
 
   private
