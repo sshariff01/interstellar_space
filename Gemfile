@@ -58,6 +58,6 @@ gem 'rspec-core'
 gem 'rspec-expectations'
 gem 'rspec-mocks'
 gem 'rspec-support'
-gem 'pry'
+gem 'pry-byebug'
 
 gem 'database_cleaner'
