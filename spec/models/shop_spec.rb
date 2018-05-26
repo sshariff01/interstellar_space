@@ -57,16 +57,16 @@ describe Shop do
         expect(error_message_for(subdomain_duplicate, :subdomain)).to include('has already been taken')
       end
     end
+  end
 
-    describe '#urn' do
-      context 'when supplied with a domain name' do
-        it 'returns the URN for the shop' do
-          shop = Shop.create(:name => 'Apple Store', :subdomain => 'apple-store')
+  describe '#urn' do
+    context 'when supplied with a domain name' do
+      it 'returns the URN for the shop' do
+        shop = Shop.create(:name => 'Apple Store', :subdomain => 'apple-store')
 
-          urn = shop.urn('domain')
+        urn = shop.urn('domain')
 
-          expect(urn).to eq('apple-store.domain')
-        end
+        expect(urn).to eq('apple-store.domain')
       end
     end
   end
