@@ -1,6 +1,16 @@
-# Add your own tasks in files placed in lib/tasks ending in .rake,
-# for example lib/tasks/capistrano.rake, and they will automatically be available to Rake.
+namespace :test do
+  desc "Run all tests"
+  task all: [:unit, :acceptance]
 
-require_relative 'config/application'
+  desc "Run unit tests"
+  task :unit do
+    sh 'rspec spec/* --format documentation --exclude-pattern spec/acceptance/*'
+  end
 
-Rails.application.load_tasks
+  desc "Run acceptance tests"
+  task :acceptance do
+    sh 'rspec spec/acceptance/* --format documentation'
+  end
+end
+
+task :default => ['test:all']
