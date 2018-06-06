@@ -1,0 +1,24 @@
+<% if errors.present? %>
+    <ul>
+      <% errors.each do |msg| %>
+          <li><%= msg %></li>
+      <% end %>
+    </ul>
+<% end %>
+
+<%= form_tag create_merchant_session_path do %>
+  <table>
+    <tr>
+      <td id="email">Email</td>
+      <td><%= text_field_tag :email, '', maxlength: 256, size: 25 %></td>
+    </tr>
+    <tr>
+      <td id="password">Password</td>
+      <td><%= password_field_tag :password, '', maxlength: 256, size: 25 %></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><%= submit_tag 'Login', id: 'login_merchant' %></td>
+    </tr>
+  </table>
+<% end %>
