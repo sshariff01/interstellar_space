@@ -1,6 +1,8 @@
 class ShopController < ApplicationController
   protect_from_forgery prepend: true
 
+  before_action :authorize
+
   def new
     @shop = Shop.new
   end
