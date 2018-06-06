@@ -1,3 +1,7 @@
+require_relative 'config/application'
+
+Rails.application.load_tasks
+
 namespace :test do
   desc "Run all tests"
   task all: [:unit, :acceptance]
