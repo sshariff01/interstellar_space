@@ -8,7 +8,7 @@ class MerchantController < ApplicationController
     @merchant = Merchant.new(merchant_params)
     if @merchant.save
       session[:merchant_id] = @merchant.id
-      redirect_to '/'
+      redirect_to merchant_root_path
     else
       render 'new'
     end
