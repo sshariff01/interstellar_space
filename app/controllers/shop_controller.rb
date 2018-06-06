@@ -39,7 +39,7 @@ class ShopController < ApplicationController
 
   def show
     if subdomain = request.url.match(/^#{request.protocol}(.+)\.(.+\..+)\/.*$/).captures.first
-      @shop = Shop.find_by_subdomain(subdomain)
+      @shop = Shop.find_by(merchant: current_merchant, subdomain: subdomain)
 
       if @shop.nil?
         redirect_to site_root_url
