@@ -1,4 +1,6 @@
 class Shop < ApplicationRecord
+  belongs_to :merchant, foreign_key: :merchant_fk
+
   validates :name, length: { minimum: 3, maximum: 40 }
   validate :name_must_not_contain_only_whitespace
 

@@ -11,8 +11,9 @@ class ShopController < ApplicationController
     @shop = Shop.create(shop_params)
 
     if @shop.valid?
-      shop_urn = "#{request.protocol}#{@shop.urn(request.domain)}"
-      shop_urn += ":#{request.port}" if Rails.env.development? || Rails.env.test?
+      shop_urn = "#{request.protocol}#{@shop.urn(site_domain)}"
+      session[:merchant_id] = current_merchant.id
+
       respond_to do |format|
         format.html { redirect_to shop_urn }
         format.json {
@@ -37,18 +38,18 @@ class ShopController < ApplicationController
   end
 
   def show
-    @shop = Shop.find_by_subdomain(request.subdomain)
+    if subdomain = request.url.match(/^#{request.protocol}(.+)\.(.+\..+)\/.*$/).captures.first
+      @shop = Shop.find_by_subdomain(subdomain)
 
-    if @shop.nil?
-      url_for_root = "#{request.protocol}#{request.domain}"
-      url_for_root += ":#{request.port}" if Rails.env.development? || Rails.env.test?
-      redirect_to url_for_root
+      if @shop.nil?
+        redirect_to site_root_url
+      end
     end
   end
 
   private
 
   def shop_params
-    params.require(:shop).permit(:name, :description, :subdomain)
+    params.require(:shop).permit(:name, :description, :subdomain).merge(merchant_fk: current_merchant.id)
   end
 end

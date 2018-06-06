@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180606011906) do
+ActiveRecord::Schema.define(version: 20180606032604) do
 
   create_table "merchants", force: :cascade do |t|
     t.string "email", limit: 256, null: false
@@ -25,6 +25,7 @@ ActiveRecord::Schema.define(version: 20180606011906) do
     t.string "subdomain", limit: 25, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "merchant_fk"
   end
 
 end

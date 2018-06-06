@@ -15,8 +15,8 @@ class SessionsController < ApplicationController
   end
 
   def destroy
-    session[:merchant_id] = nil
-    redirect_to login_merchant_path
+    session.delete(:merchant_id)
+    redirect_to site_root_url
   end
 
 end

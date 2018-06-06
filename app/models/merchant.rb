@@ -1,6 +1,7 @@
 class Merchant < ApplicationRecord
   has_secure_password
 
-  # TODO: Write test for validation
+  has_many :shops, foreign_key: :merchant_fk
+
   validates_uniqueness_of :email
 end

@@ -1,6 +1,6 @@
 class ActiveSubdomain
-  def self.matches? request
-    if request.subdomain.present?
+  def self.matches?(request)
+    if request.url.match(/^#{request.protocol}(.+\.)*(.+\..+)$/).captures.first.present?
       true
     else
       false
