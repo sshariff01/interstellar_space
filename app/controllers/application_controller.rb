@@ -5,7 +5,7 @@ class ApplicationController < ActionController::Base
     @current_merchant ||= Merchant.find(session[:merchant_id]) if session[:merchant_id]
   end
 
-  helper_method :current_merchant, :site_root_url
+  helper_method :current_merchant, :site_root_url, :site_domain
 
   def authorize
     redirect_to "#{site_root_url}/merchant/signup" unless current_merchant

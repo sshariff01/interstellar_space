@@ -1,0 +1,13 @@
+<h1>Your Brainspace Dashboard</h1>
+
+<ul>
+  <% current_merchant.shops.each do |shop| %>
+      <li><%= link_to shop.name, "#{request.protocol}#{shop.urn(site_domain)}" %></li>
+  <% end %>
+</ul>
+
+<% if current_merchant.shops.any? %>
+    <p><%= link_to 'Sign up', new_shop_path, id: 'sign_up_shop' %> with another shop!</p>
+<% else %>
+    <p><%= link_to 'Sign up', new_shop_path, id: 'sign_up_shop' %> with your first shop today!</p>
+<% end %>

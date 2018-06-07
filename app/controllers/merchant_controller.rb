@@ -1,5 +1,9 @@
 class MerchantController < ApplicationController
 
+  def index
+    render 'show' if current_merchant.present?
+  end
+
   def new
     @merchant = Merchant.new
   end

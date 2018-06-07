@@ -1,28 +1,28 @@
 <% if @merchant.errors.any? %>
-    <ul>
-      <% @merchant.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-    </ul>
+  <ul>
+    <% @merchant.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+    <% end %>
+  </ul>
 <% end %>
 
 <%= form_for merchant, url: register_merchant_path do |f| %>
-    <table>
-      <tr>
-        <td id="email">Email</td>
-        <td><%= f.text_field :email, maxlength: 256, size: 25 %></td>
-      </tr>
-      <tr>
-        <td id="password">Password</td>
-        <td><%= f.password_field :password, maxlength: 256, size: 25 %></td>
-      </tr>
-      <tr>
-        <td id="password-confirmation">Confirm Password</td>
-        <td><%= f.password_field :password_confirmation, maxlength: 256, size: 25 %></td>
-      </tr>
-      <tr>
-        <td></td>
-        <td><%= f.submit 'Sign Up', id: 'register_merchant' %></td>
-      </tr>
-    </table>
+  <table>
+    <tr>
+      <td id="email">Email</td>
+      <td><%= f.text_field :email, maxlength: 256, size: 25 %></td>
+    </tr>
+    <tr>
+      <td id="password">Password</td>
+      <td><%= f.password_field :password, maxlength: 256, size: 25 %></td>
+    </tr>
+    <tr>
+      <td id="password-confirmation">Confirm Password</td>
+      <td><%= f.password_field :password_confirmation, maxlength: 256, size: 25 %></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><%= f.submit 'Sign Up', id: 'register_merchant' %></td>
+    </tr>
+  </table>
 <% end %>
