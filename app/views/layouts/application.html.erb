@@ -10,7 +10,7 @@
 
   <body>
     <% if current_merchant %>
-        Signed in as <%= current_merchant.email %> | <%= link_to 'Logout', '/merchant/logout' %>
+        Signed in as <%= current_merchant.email %> | <%= link_to 'Logout', "#{site_root_url}/merchant/logout" %>
     <% else %>
         <%= link_to 'Login', '/merchant/login' %> | <%= link_to 'Signup', '/merchant/signup' %>
     <% end %>
