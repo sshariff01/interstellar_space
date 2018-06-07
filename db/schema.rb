@@ -14,6 +14,7 @@ ActiveRecord::Schema.define(version: 20180606032604) do
 
   create_table "merchants", primary_key: "pk", force: :cascade do |t|
     t.string "email", limit: 256, null: false
+    t.string "name", limit: 256, null: false
     t.string "password_digest", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
