@@ -6,7 +6,7 @@ describe "Specifications", js: true do
 
     click_on 'Sign up'
 
-    expect(page).to have_current_path(create_shop_path), "Current page path was #{page.current_path}"
+    expect(page).to have_current_path(signup_merchant_path), "Unexpected URL.:\nExpected: #{new_merchant_path}\nGot: #{page.current_path}"
 
     within('#new_shop') do
       assert_selector 'td#name', text: 'Shop Name'
