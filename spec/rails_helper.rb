@@ -66,11 +66,11 @@ RSpec.configure do |config|
 end
 
 Capybara.register_driver :selenium_chrome do |app|
-  Capybara::Selenium::Driver.new(app, browser: :chrome)
+  Capybara::Selenium::Driver.new(app, browser: :chrome, args: ['headless'])
 end
 
 Capybara.javascript_driver = :selenium_chrome
 
-Capybara.app_host = 'http://localhost:3002'
+Capybara.app_host = 'http://lvh.me:3002'
 Capybara.server_host = 'localhost'
 Capybara.server_port = '3002'
