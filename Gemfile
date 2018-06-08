@@ -42,6 +42,7 @@ group :development, :test do
   gem 'rspec-rails'
   gem 'capybara'
   gem 'selenium-webdriver'
+  gem 'chromedriver-helper'
 
   gem 'rspec'
   gem 'rspec-core'
