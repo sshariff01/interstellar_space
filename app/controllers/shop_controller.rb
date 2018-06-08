@@ -1,7 +1,7 @@
 class ShopController < ApplicationController
   protect_from_forgery prepend: true
 
-  before_action :authorize
+  before_action :authorize, except: [:show]
 
   def new
     @shop = Shop.new
@@ -39,10 +39,10 @@ class ShopController < ApplicationController
 
   def show
     if subdomain = request.url.match(/^#{request.protocol}(.+)\.(.+\..+)\/.*$/).captures.first
-      @shop = Shop.find_by(merchant: current_merchant, subdomain: subdomain)
+      @shop = Shop.find_by(subdomain: subdomain)
 
       if @shop.nil?
-        redirect_to site_root_url
+        redirect_to not_found and return
       end
     end
   end
