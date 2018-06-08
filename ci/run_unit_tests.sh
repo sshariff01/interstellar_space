@@ -1,4 +1,6 @@
-#!/user/bin/env sh -x
+#!/usr/bin/env sh
+
+set -x
 
 apt-get update
 yes | sudo apt-get install libsqlite3-dev
