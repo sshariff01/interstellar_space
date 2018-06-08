@@ -1,10 +1,12 @@
 class MerchantController < ApplicationController
 
   def index
-    render 'show' if current_merchant.present?
+    redirect_to merchant_path(current_merchant) and return if current_merchant.present?
   end
 
   def new
+    redirect_to merchant_path(current_merchant) and return if current_merchant.present?
+
     @merchant = Merchant.new
   end
 
