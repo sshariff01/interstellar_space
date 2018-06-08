@@ -14,5 +14,4 @@ yes | sudo apt-get install google-chrome-stable
 
 bundle install
 rake db:migrate
-rake test:unit
 rake test:acceptance

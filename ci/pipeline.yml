@@ -7,11 +7,11 @@ resources:
     branch: master
 
 jobs:
-- name: tests
+- name: unit-test
   plan:
   - get: interstellar_space
     trigger: true
-  - task: all
+  - task: run-unit-tests
     config:
       platform: linux
       inputs:
@@ -21,6 +21,24 @@ jobs:
         source:
           repository: bitnami/rails
       run:
-        path: ci/run_tests.sh
+        path: ci/run_unit_tests.sh
+        dir: interstellar_space
+        user: root
+
+- name: acceptance-test
+  plan:
+  - get: interstellar_space
+    trigger: true
+  - task: run-acceptance-tests
+    config:
+      platform: linux
+      inputs:
+      - name: interstellar_space
+      image_resource:
+        type: docker-image
+        source:
+          repository: bitnami/rails
+      run:
+        path: ci/run_acceptance_tests.sh
         dir: interstellar_space
         user: root
