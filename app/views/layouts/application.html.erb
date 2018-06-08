@@ -14,7 +14,7 @@
         <br>
         <%= link_to 'Logout', "#{site_root_url}/merchant/logout" %>
     <% else %>
-        <%= link_to 'Login', '/merchant/login' %> | <%= link_to 'Signup', '/merchant/signup' %>
+        <%= link_to 'Login', "#{site_root_url}/merchant/login" %> | <%= link_to 'Signup', "#{site_root_url}/merchant/signup" %>
     <% end %>
 
     <%= yield %>

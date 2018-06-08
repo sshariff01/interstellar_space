@@ -15,7 +15,7 @@ class ShopController < ApplicationController
       session[:merchant_id] = current_merchant.id
 
       respond_to do |format|
-        format.html { redirect_to shop_urn }
+        format.html { redirect_to shop_urn and return }
         format.json {
           render status: :accepted,
                  json: {

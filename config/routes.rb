@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   constraints(ActiveSubdomain) do
     root to: 'shop#show', as: 'merchant_root'
 
-    resources :shop, only: [:create, :show, :new]
+    resources :shop, only: [:show]
   end
 
   constraints(InactiveSubdomain) do
@@ -20,6 +20,8 @@ Rails.application.routes.draw do
     match '/merchant/logout', to: 'sessions#destroy', via: [:get]
 
     resources :merchant, only: [:create, :show, :new]
+
+    resources :shop, only: [:create, :new]
   end
 
 end
