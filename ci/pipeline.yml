@@ -21,7 +21,7 @@ jobs:
         source:
           repository: bitnami/rails
       run:
-        path: ci/run_unit_tests.sh
+        path: ci/run_tests.sh
         dir: interstellar_space
         user: root
 
