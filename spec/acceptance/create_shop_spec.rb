@@ -2,7 +2,7 @@ require 'rails_helper'
 
 describe "Specifications", js: true do
   it "User creates a new shop and is redirected to the newly created shop's home page" do
-    visit root_path
+    visit site_root_path
 
     click_on 'Sign up'
 
