@@ -19,7 +19,7 @@ jobs:
       image_resource:
         type: docker-image
         source:
-          repository: bitnami/rails
+          repository: sshariff/rails
       run:
         path: ci/run_unit_tests.sh
         dir: interstellar_space
@@ -28,6 +28,7 @@ jobs:
 - name: acceptance-test
   plan:
   - get: interstellar_space
+    passed: [unit-test]
     trigger: true
   - task: run-acceptance-tests
     config:
@@ -37,7 +38,7 @@ jobs:
       image_resource:
         type: docker-image
         source:
-          repository: bitnami/rails
+          repository: sshariff/rails
       run:
         path: ci/run_acceptance_tests.sh
         dir: interstellar_space
