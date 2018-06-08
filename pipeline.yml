@@ -2,7 +2,9 @@
 resources:
 - name: interstellar_space
   type: git
-  source: {uri: "https://github.com/sshariff01/interstellar_space"}
+  source:
+    uri: https://github.com/sshariff01/interstellar_space
+    branch: ci_setup
 
 jobs:
 - name: tests
