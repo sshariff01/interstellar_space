@@ -50,8 +50,9 @@ describe Shop do
       end
 
       it 'creates an error if subdomain specified already exists' do
-        subdomain = Shop.create(:name => 'Diamond Store', :subdomain => 'hello-world')
-        subdomain_duplicate = Shop.create(:name => 'Thrift Shop', :subdomain => 'hello-world')
+        merchant = Merchant.create(:email => 'merchant@email.com', :name => 'Merchant', :password => 'Passw0rd')
+        subdomain = Shop.create(:name => 'Diamond Store', :subdomain => 'hello-world', :merchant => merchant)
+        subdomain_duplicate = Shop.create(:name => 'Thrift Shop', :subdomain => 'hello-world', :merchant => merchant)
 
         expect(error_message_for(subdomain, :subdomain)).to be_empty
         expect(error_message_for(subdomain_duplicate, :subdomain)).to include('has already been taken')

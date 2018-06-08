@@ -25,6 +25,6 @@ class Merchant < ApplicationRecord
 
   def password_complexity
     # Regexp extracted from https://stackoverflow.com/questions/19605150/regex-for-password-must-contain-at-least-eight-characters-at-least-one-number-a
-    errors.add :password, 'must be at least eight characters, contain at least one uppercase letter, one lowercase letter, and one number' if !VALID_PASSWORD_REGEX.match(password)
+    errors.add(:password, 'must be at least eight characters, contain at least one uppercase letter, one lowercase letter, and one number') if !VALID_PASSWORD_REGEX.match(password)
   end
 end
