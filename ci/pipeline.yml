@@ -19,11 +19,10 @@ jobs:
       image_resource:
         type: docker-image
         source:
-          repository: sshariff/rails
+          repository: sshariff/rails-postgres
       run:
         path: ci/run_unit_tests.sh
         dir: interstellar_space
-        user: root
 
 - name: acceptance-test
   plan:
@@ -38,8 +37,7 @@ jobs:
       image_resource:
         type: docker-image
         source:
-          repository: sshariff/rails
+          repository: sshariff/rails-postgres
       run:
         path: ci/run_acceptance_tests.sh
         dir: interstellar_space
-        user: root
