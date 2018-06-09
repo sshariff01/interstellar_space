@@ -12,6 +12,9 @@
 
 ActiveRecord::Schema.define(version: 20180606032604) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "merchants", primary_key: "pk", force: :cascade do |t|
     t.string "email", limit: 256, null: false
     t.string "name", limit: 256, null: false
@@ -29,4 +32,5 @@ ActiveRecord::Schema.define(version: 20180606032604) do
     t.integer "merchant_fk"
   end
 
+  add_foreign_key "shops", "merchants", column: "merchant_fk", primary_key: "pk"
 end
