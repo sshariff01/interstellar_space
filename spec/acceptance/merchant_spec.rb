@@ -9,7 +9,7 @@ describe "Specifications" do
     )
   end
 
-  it "Merchant can register" do
+  it "Merchant can register and log out" do
     visit site_root_path
 
     click_on 'Sign up'
@@ -31,6 +31,14 @@ describe "Specifications" do
     end
 
     assert_selector 'h1', text: 'Socks Co. Dashboard'
+
+    click_on 'Logout'
+
+    expect(page).to have_current_path(site_root_path), "Unexpected path:\nExpected: #{site_root_path}, but got: #{page.current_path}"
+
+    assert_no_selector '#logout'
+    assert_selector '#login', text: 'Login'
+    assert_selector '#signup', text: 'Signup'
   end
 
   it "Merchant can log in and create a shop" do
