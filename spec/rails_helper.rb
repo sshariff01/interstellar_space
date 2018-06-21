@@ -76,6 +76,17 @@ Capybara.register_driver(:headless_chrome) do |app|
   )
 end
 
+Capybara.register_driver(:chrome) do |app|
+  capabilities = Selenium::WebDriver::Remote::Capabilities.chrome(
+      chromeOptions: { args: %w[--screen-size=1024x640] }
+  )
+  Capybara::Selenium::Driver.new(
+      app,
+      browser: :chrome,
+      desired_capabilities: capabilities
+  )
+end
+
 Capybara.javascript_driver = :headless_chrome
 Capybara.current_driver = :headless_chrome
 
