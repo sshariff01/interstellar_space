@@ -41,40 +41,50 @@ describe "Specifications" do
     assert_selector '#signup', text: 'Signup'
   end
 
-  it "Merchant can log in and create a shop" do
-    visit site_root_path
-
-    click_on 'Login'
-
-    expect(page).to have_current_path(login_merchant_path), "Unexpected path:\nExpected: #{login_merchant_path}, but got: #{page.current_path}"
-
-    within('#new_session') do
-      assert_selector 'td#email', text: 'Email'
-      assert_selector 'td#password', text: 'Password'
-
-      fill_in 'email', with: 'jakob@socks.co'
-      fill_in 'password', with: 's0m3Passw0rd'
+  context "Merchant is logged in" do
+    before(:each) do
+      visit site_root_path
 
       click_on 'Login'
+
+      expect(page).to have_current_path(login_merchant_path), "Unexpected path:\nExpected: #{login_merchant_path}, but got: #{page.current_path}"
+
+      within('#new_session') do
+        assert_selector 'td#email', text: 'Email'
+        assert_selector 'td#password', text: 'Password'
+
+        fill_in 'email', with: 'jakob@socks.co'
+        fill_in 'password', with: 's0m3Passw0rd'
+
+        click_on 'Login'
+      end
+
+      assert_selector 'h1', text: 'Socks Company Dashboard'
     end
 
-    assert_selector 'h1', text: 'Socks Company Dashboard'
+    it "Merchant can create a shop" do
+      click_on 'Sign up'
 
-    click_on 'Sign up'
+      within('#new_shop') do
+        assert_selector 'td#name', text: 'Shop Name'
+        assert_selector 'td#description', text: 'Shop Description'
+        assert_selector 'td#subdomain', text: 'Subdomain'
 
-    within('#new_shop') do
-      assert_selector 'td#name', text: 'Shop Name'
-      assert_selector 'td#description', text: 'Shop Description'
-      assert_selector 'td#subdomain', text: 'Subdomain'
+        fill_in 'shop_name', with: 'Fuzzy Feet'
+        fill_in 'shop_description', with: 'Fuzzy covers for all your feet!'
+        fill_in 'shop_subdomain', with: 'fuzzy-feet-23'
 
-      fill_in 'shop_name', with: 'Fuzzy Feet'
-      fill_in 'shop_description', with: 'Fuzzy covers for all your feet!'
-      fill_in 'shop_subdomain', with: 'fuzzy-feet-23'
+        click_on 'Create'
+      end
 
-      click_on 'Create'
+      expect(current_subdomain).to eq('fuzzy-feet-23')
     end
 
-    expect(current_subdomain).to eq('fuzzy-feet-23')
+    it "Merchant can navigate to dashboard from any screen" do
+      click_on 'Dashboard'
+
+      assert_selector 'h1', text: 'Socks Company Dashboard'
+    end
   end
 
   def current_subdomain
