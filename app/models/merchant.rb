@@ -13,7 +13,7 @@ class Merchant < ApplicationRecord
 
   WHITESPACE_REGEX = /(^\s|\s$)/
   VALID_EMAIL_REGEX = /\A[^@\s]+@([^@\s]+\.)+[^@\s]+\z/
-  VALID_PASSWORD_REGEX = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/
+  VALID_PASSWORD_REGEX = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{8,}$/
 
   def name_must_not_contain_only_whitespace
     errors.add(:name, 'must not begin or end with whitespace') if WHITESPACE_REGEX.match(name)
@@ -24,7 +24,7 @@ class Merchant < ApplicationRecord
   end
 
   def password_complexity
-    # Regexp extracted from https://stackoverflow.com/questions/19605150/regex-for-password-must-contain-at-least-eight-characters-at-least-one-number-a
+    # Regexp extracted from https://stackoverflow.com/a/19605207
     errors.add(:password, 'must be at least eight characters, contain at least one uppercase letter, one lowercase letter, and one number') if !VALID_PASSWORD_REGEX.match(password)
   end
 end

@@ -9,36 +9,64 @@ describe "Specifications" do
     )
   end
 
-  it "Merchant can register and log out" do
-    visit site_root_path
+  context "Merchant is not registered" do
+    it "Merchant can register and log out" do
+      visit site_root_path
 
-    click_on 'Sign up'
+      click_on 'Sign up'
 
-    expect(page).to have_current_path(signup_merchant_path), "Unexpected path:\nExpected: #{new_merchant_path}, but got: #{page.current_path}"
+      expect(page).to have_current_path(signup_merchant_path), "Unexpected path:\nExpected: #{new_merchant_path}, but got: #{page.current_path}"
 
-    within('#new_merchant') do
-      assert_selector 'td#name', text: 'Name'
-      assert_selector 'td#email', text: 'Email'
-      assert_selector 'td#password', text: 'Password'
-      assert_selector 'td#password-confirmation', text: 'Confirm Password'
+      within('#new_merchant') do
+        assert_selector 'td#name', text: 'Name'
+        assert_selector 'td#email', text: 'Email'
+        assert_selector 'td#password', text: 'Password'
+        assert_selector 'td#password-confirmation', text: 'Confirm Password'
 
-      fill_in 'merchant_name', with: 'Socks Co.'
-      fill_in 'merchant_email', with: 'thesockcompany@email.com'
-      fill_in 'merchant_password', with: 'Sockscompany1'
-      fill_in 'merchant_password_confirmation', with: 'Sockscompany1'
+        fill_in 'merchant_name', with: 'Socks Co.'
+        fill_in 'merchant_email', with: 'thesockcompany@email.com'
+        fill_in 'merchant_password', with: 'Sockscompany1'
+        fill_in 'merchant_password_confirmation', with: 'Sockscompany1'
 
-      click_on 'Sign Up'
+        click_on 'Sign Up'
+      end
+
+      assert_selector 'h1', text: 'Socks Co. Dashboard'
+
+      click_on 'Logout'
+
+      expect(page).to have_current_path(site_root_path), "Unexpected path:\nExpected: #{site_root_path}, but got: #{page.current_path}"
+
+      assert_no_selector '#logout'
+      assert_selector '#login', text: 'Login'
+      assert_selector '#signup', text: 'Signup'
     end
 
-    assert_selector 'h1', text: 'Socks Co. Dashboard'
+    it "Merchant must register with a valid password (i.e. password must be at least eight characters, contain at least one uppercase letter, one lowercase letter, and one number)" do
+      visit site_root_path
 
-    click_on 'Logout'
+      click_on 'Sign up'
 
-    expect(page).to have_current_path(site_root_path), "Unexpected path:\nExpected: #{site_root_path}, but got: #{page.current_path}"
+      expect(page).to have_current_path(signup_merchant_path), "Unexpected path:\nExpected: #{new_merchant_path}, but got: #{page.current_path}"
 
-    assert_no_selector '#logout'
-    assert_selector '#login', text: 'Login'
-    assert_selector '#signup', text: 'Signup'
+      within('#new_merchant') do
+        assert_selector 'td#name', text: 'Name'
+        assert_selector 'td#email', text: 'Email'
+        assert_selector 'td#password', text: 'Password'
+        assert_selector 'td#password-confirmation', text: 'Confirm Password'
+
+        fill_in 'merchant_name', with: 'Socks Co.'
+        fill_in 'merchant_email', with: 'thesockcompany@email.com'
+        fill_in 'merchant_password', with: 'socks1company'
+        fill_in 'merchant_password_confirmation', with: 'socks1company'
+
+        click_on 'Sign Up'
+      end
+
+      expect(page).to have_current_path(register_merchant_path), "Unexpected path:\nExpected: #{new_merchant_path}, but got: #{page.current_path}"
+
+      assert_selector '.errors li', text: 'Password must be at least eight characters, contain at least one uppercase letter, one lowercase letter, and one number'
+    end
   end
 
   context "Merchant is logged in" do
