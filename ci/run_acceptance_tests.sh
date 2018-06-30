@@ -2,10 +2,11 @@
 
 set -ex
 
-service postgresql start
+docker-compose build app
 
-bundle install
+docker-compose run --service-ports app rake db:migrate
 
-rake db:migrate
+docker exec -it interstellar_space_app_run_1 rake test:acceptance
 
-rake test:acceptance
+docker rm -f interstellar_space_app_run_1
+
