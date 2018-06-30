@@ -1,0 +1,33 @@
+version: '3'
+
+services:
+  app:
+    build: .
+    command: bundle exec rails s
+    restart: always
+    volumes:
+      - .:/home/app
+      - bundle:/bundle
+    environment:
+      RAILS_ENV: development
+    depends_on: [postgres]
+    ports:
+      - "3000:3000"
+  postgres:
+    image: postgres
+    environment:
+      - POSTGRES_DB=interstellar_space_dev
+      - POSTGRES_PASSWORD=ispace_dev
+      - POSTGRES_USER=ispace_user
+      - PGDATA=/database
+    ports:
+      - "5432:5432"
+    volumes:
+      - db-data:/var/lib/psql
+
+volumes:
+  db-data:
+    driver: local
+  bundle:
+    driver: local
+

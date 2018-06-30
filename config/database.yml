@@ -1,15 +1,15 @@
 default: &default
   adapter: postgresql
+  encoding: unicode
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   timeout: 5000
+  username: ispace_user
+  password: ispace_dev
+  host: postgres
 
 development:
   <<: *default
   database: interstellar_space_dev
-  port: 5432
-  encoding: unicode
-  username: ispace_user
-  password: ispace_dev
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
