@@ -3,7 +3,7 @@ version: '3'
 services:
   app:
     build: .
-    command: bash -c "bundle exec rake db:migrate && bundle exec rails s"
+    command: bash -c "bundle exec rake db:migrate && bundle exec rake db:seed && bundle exec rails s"
     restart: always
     volumes:
       - .:/home/app
@@ -13,6 +13,7 @@ services:
     depends_on: [postgres]
     ports:
       - "3000:3000"
+
   postgres:
     image: postgres
     environment:
