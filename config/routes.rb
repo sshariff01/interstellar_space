@@ -4,9 +4,9 @@ require 'inactive_subdomain'
 Rails.application.routes.draw do
 
   constraints(ActiveSubdomain) do
-    root to: 'shop#show', as: 'merchant_root'
+    root to: 'shops#show', as: 'merchant_root'
 
-    resources :shop, only: [:show]
+    resources :shops, only: [:show]
   end
 
   constraints(InactiveSubdomain) do
@@ -21,7 +21,7 @@ Rails.application.routes.draw do
 
     resources :merchants, only: [:create, :show, :new]
 
-    resources :shop, only: [:create, :new]
+    resources :shops, only: [:create, :new]
   end
 
 end

@@ -1,4 +1,4 @@
-class ShopController < ApplicationController
+class ShopsController < ApplicationController
   protect_from_forgery prepend: true
 
   before_action :authorize, except: [:show]
