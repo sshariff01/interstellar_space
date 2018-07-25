@@ -1,1 +1,32 @@
+<style>
+  .gray-background {
+    background: #efefef;
+  }
+
+  .white-background {
+    background: #ffffff;
+  }
+</style>
+
 <h1><%= @shop.name %></h1>
+
+<h2>Products</h2>
+
+<% if @shop.products.any? %>
+  <div>
+    <% @shop.products.each do |product| %>
+      <div class="<%= cycle('gray-background', 'white-background') -%>">
+        <h3><%= product.name %></h3>
+        <p>
+          $<%= product.price %>
+          <br/>
+          <%= link_to 'Purchase'%>
+        </p>
+
+      </div>
+    <% end %>
+  </div>
+<% else %>
+  <h3>There are currently no products for sale.</h3>
+<% end %>
+

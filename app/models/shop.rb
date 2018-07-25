@@ -1,5 +1,8 @@
 class Shop < ApplicationRecord
+
   belongs_to :merchant, foreign_key: :merchant_fk
+
+  has_many :products, foreign_key: :shop_fk
 
   validates :name, length: { minimum: 3, maximum: 200 }
   validate :name_must_not_contain_only_whitespace
@@ -21,4 +24,5 @@ class Shop < ApplicationRecord
   def urn(domain)
     "#{subdomain}.#{domain}"
   end
+
 end
