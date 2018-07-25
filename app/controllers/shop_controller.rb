@@ -38,7 +38,7 @@ class ShopController < ApplicationController
   end
 
   def show
-    if subdomain = request.url.match(/^#{request.protocol}(.+)\.(.+\..+)\/.*$/).captures.first
+    if subdomain.present?
       @shop = Shop.find_by(subdomain: subdomain)
 
       if @shop.nil?
@@ -51,5 +51,13 @@ class ShopController < ApplicationController
 
   def shop_params
     params.require(:shop).permit(:name, :description, :subdomain).merge(merchant_fk: current_merchant.id)
+  end
+
+  def subdomain
+    @subdomain ||= if Rails.env.production?
+      request.url.match(/^#{request.protocol}(.+)\.(.+\..+\..+)\/.*$/).captures.first
+    else
+      request.url.match(/^#{request.protocol}(.+)\.(.+\..+)\/.*$/).captures.first
+    end
   end
 end

@@ -1,7 +1,8 @@
 FROM phusion/passenger-ruby23
 
 # set rails env vars
-ENV RAILS_ENV production
+# ENV RAILS_ENV production
+ENV RAILS_ENV development
 ENV BUNDLE_PATH /bundle
 
 # set the app directory var
@@ -33,8 +34,8 @@ RUN bundle install
 
 ADD . .
 
-# Precompile assets
-RUN bundle exec rake assets:precompile
+# Precompile assets - only want to do for production
+# RUN bundle exec rake assets:precompile
 
 EXPOSE 3000
 

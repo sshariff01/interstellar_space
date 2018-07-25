@@ -5,11 +5,11 @@ default: &default
   timeout: 5000
   username: ispace_user
   password: ispace_dev
-  host: postgres
 
 development:
   <<: *default
   database: interstellar_space_dev
+  host: postgres
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
@@ -21,3 +21,4 @@ test:
 production:
   <<: *default
   database: interstellar_space_prod
+  host: "/cloudsql/interstellar-space:us-central1:interstellar-space-dev"

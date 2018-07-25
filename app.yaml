@@ -1,0 +1,10 @@
+runtime: ruby
+env: flex
+entrypoint: bundle exec rackup --port $PORT
+
+env_variables:
+  SECRET_KEY_BASE: 00e4ae04f7b902743612e3d13abe1282dfeb91932b1e2c486d5ee26bb21719b1d5362c48d19c12b8b8e5f293f03bda56a475372a9cd6bcdf9bfd165094150152 
+
+beta_settings:
+  cloud_sql_instances: interstellar-space:us-central1:interstellar-space-dev 
+

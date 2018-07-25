@@ -3,7 +3,7 @@ version: '3'
 services:
   app:
     build: .
-    command: bundle exec rails s
+    command: bash -c "bundle exec rake db:migrate && bundle exec rails s"
     restart: always
     volumes:
       - .:/home/app

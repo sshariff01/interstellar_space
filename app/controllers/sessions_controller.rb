@@ -1,4 +1,5 @@
 class SessionsController < ApplicationController
+  skip_before_action :verify_authenticity_token
 
   def new
     redirect_to site_root_url and return if current_merchant.present?

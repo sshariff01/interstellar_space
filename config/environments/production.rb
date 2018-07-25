@@ -89,5 +89,5 @@ Rails.application.configure do
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
 
-  config.session_store :cookie_store, key: '_app_name_session', domain: '.yourdomain.com'
+  config.session_store :cookie_store, key: '_app_name_session', domain: :all, tld_length: 3
 end
