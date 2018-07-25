@@ -12,9 +12,9 @@
     <% if current_merchant %>
         Signed in as <%= current_merchant.email %> | <%= link_to 'Dashboard', "#{home_url}" %>
         <br>
-        <%= link_to 'Logout', "#{home_url}/merchant/logout", id: 'logout' %>
+        <%= link_to 'Logout', "#{home_url}/merchants/logout", id: 'logout' %>
     <% else %>
-        <%= link_to 'Login', "#{home_url}/merchant/login", id: 'login' %> | <%= link_to 'Signup', "#{home_url}/merchant/signup", id: 'signup' %>
+        <%= link_to 'Login', "#{home_url}/merchants/login", id: 'login' %> | <%= link_to 'Signup', "#{home_url}/merchants/signup", id: 'signup' %>
     <% end %>
 
     <%= yield %>

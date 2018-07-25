@@ -1,4 +1,4 @@
-class MerchantController < ApplicationController
+class MerchantsController < ApplicationController
   skip_before_action :verify_authenticity_token
 
   def index
@@ -24,7 +24,7 @@ class MerchantController < ApplicationController
   private
 
   def merchant_params
-    params.require(:merchant).permit(:name, :email, :password, :password_confirmation)
+    params.require(:merchants).permit(:name, :email, :password, :password_confirmation)
   end
 
 end

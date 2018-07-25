@@ -10,16 +10,16 @@ Rails.application.routes.draw do
   end
 
   constraints(InactiveSubdomain) do
-    root to: 'merchant#index', as: 'site_root'
+    root to: 'merchants#index', as: 'site_root'
 
-    match '/merchant/signup', to: 'merchant#new', as: 'signup_merchant', via: [:get]
-    match '/merchant/create', to: 'merchant#create', as: 'register_merchant', via: [:post]
+    match '/merchants/signup', to: 'merchants#new', as: 'signup_merchant', via: [:get]
+    match '/merchants/create', to: 'merchants#create', as: 'register_merchant', via: [:post]
 
-    match '/merchant/login', to: 'sessions#new', as: 'login_merchant', via: [:get]
-    match '/merchant/login', to: 'sessions#create', as: 'create_merchant_session', via: [:post]
-    match '/merchant/logout', to: 'sessions#destroy', via: [:get]
+    match '/merchants/login', to: 'sessions#new', as: 'login_merchant', via: [:get]
+    match '/merchants/login', to: 'sessions#create', as: 'create_merchant_session', via: [:post]
+    match '/merchants/logout', to: 'sessions#destroy', via: [:get]
 
-    resources :merchant, only: [:create, :show, :new]
+    resources :merchants, only: [:create, :show, :new]
 
     resources :shop, only: [:create, :new]
   end
