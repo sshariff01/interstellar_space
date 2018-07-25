@@ -1,0 +1,29 @@
+<%= form_tag('/products/purchase', method: 'post', id: 'payment-form') do %>
+    <%= hidden_field_tag 'product_name', @product.name %>
+    <%= hidden_field_tag 'product_price', @product.price %>
+    <%= hidden_field_tag 'payment_method_nonce', 'Payment Method Nonce', id: 'payment_method_nonce' %>
+    <%= submit_tag '', id: 'submit_purchase', :style => 'display: none;' %>
+<% end %>
+
+<script src="https://js.braintreegateway.com/web/dropin/1.11.0/js/dropin.min.js"></script>
+<div id="dropin-container"></div>
+<button id="purchase-button">Purchase</button>
+
+<script>
+    var button = document.querySelector('#purchase-button');
+    var form = document.querySelector('#payment-form');
+    var client_token = "<%= @client_token %>";
+
+    braintree.dropin.create({
+        authorization: client_token,
+        container: '#dropin-container'
+    }, function (createErr, instance) {
+        button.addEventListener('click', function () {
+            instance.requestPaymentMethod(function (err, payload) {
+                // Submit payload.nonce to your server
+                document.querySelector('#payment_method_nonce').value = payload.nonce;
+                form.submit();
+            });
+        });
+    });
+</script>

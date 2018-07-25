@@ -20,7 +20,7 @@
         <p>
           $<%= product.price %>
           <br/>
-          <%= link_to 'Purchase'%>
+          <%= link_to 'Purchase', { controller: 'products', action: 'purchase', id: product.id } %>
         </p>
 
       </div>
@@ -29,4 +29,3 @@
 <% else %>
   <h3>There are currently no products for sale.</h3>
 <% end %>
-
