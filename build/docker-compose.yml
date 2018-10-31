@@ -27,8 +27,6 @@ services:
       - ./tmp/db:/var/lib/postgresql/data
 
 volumes:
-  db-data:
-    driver: local
   bundle:
     driver: local
 
