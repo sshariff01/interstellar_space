@@ -3,13 +3,13 @@ version: '3'
 services:
   app:
     build: .
-    command: bash -c "bundle exec rake db:migrate && bundle exec rake db:seed && bundle exec rails s"
+    command: bash -c "bundle exec rails s"
     restart: always
+    environment:
+      RAILS_ENV: development
     volumes:
       - .:/home/app
       - bundle:/bundle
-    environment:
-      RAILS_ENV: development
     depends_on: [postgres]
     ports:
       - "3000:3000"
@@ -20,11 +20,11 @@ services:
       - POSTGRES_DB=interstellar_space_dev
       - POSTGRES_PASSWORD=ispace_dev
       - POSTGRES_USER=ispace_user
-      - PGDATA=/database
+      - PGDATA=/var/lib/postgresql/data
     ports:
       - "5432:5432"
     volumes:
-      - db-data:/var/lib/psql
+      - ./tmp/db:/var/lib/postgresql/data
 
 volumes:
   db-data:
