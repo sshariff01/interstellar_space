@@ -55,4 +55,7 @@ Rails.application.configure do
   config.action_dispatch.tld_length = 0
 
   config.session_store :cookie_store, key: '_app_name_session', domain: :all, tld_length: 2
+
+  config.log_level = :debug
+
 end

@@ -6,7 +6,7 @@
   </head>
 
   <body>
-    <% if current_merchant %>
+    <% if current_merchant.present? %>
         Signed in as <%= current_merchant.email %> | <%= link_to 'Dashboard', "#{home_url}" %>
         <br>
         <%= link_to 'Logout', "#{home_url}/merchants/logout", id: 'logout' %>

@@ -17,8 +17,7 @@ Rails.application.routes.draw do
 
     root to: 'merchants#index', as: 'site_root'
 
-    resources :merchants, only: [:create, :show, :new]
-
+    match '/merchants/dashboard', to: 'merchants#dashboard', as: 'merchant_dashboard', via: [:get]
     match '/merchants/signup', to: 'merchants#new', as: 'signup_merchant', via: [:get]
     match '/merchants/create', to: 'merchants#create', as: 'register_merchant', via: [:post]
 
