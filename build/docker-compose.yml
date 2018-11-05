@@ -1,6 +1,15 @@
 version: '3'
 
 services:
+  web:
+    build:
+      context: .
+      dockerfile: ./docker/web/Dockerfile
+    depends_on:
+      - app
+    ports:
+      - 8080:80
+
   app:
     build: .
     command: bash -c "bundle exec rails s"
@@ -11,8 +20,6 @@ services:
       - .:/home/app
       - bundle:/bundle
     depends_on: [postgres]
-    ports:
-      - "3000:3000"
 
   postgres:
     image: postgres
